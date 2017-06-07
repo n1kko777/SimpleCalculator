@@ -27,16 +27,15 @@
         android:background="@color/colorPrimaryDark"
         android:weightSum="8">
 
-        <EditText
+        <TextView
             android:id="@+id/editText"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="6"
-            android:enabled="false"
             android:gravity="bottom"
             android:lines="2"
             android:maxLines="2"
-            android:textSize="30sp"  />
+            android:textSize="35sp"  />
 
         <Button
             android:layout_width="0dp"

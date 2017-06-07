@@ -28,6 +28,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        decimalFormat = new DecimalFormat("#.##########");
 
         inic_value();
         inic_oper();
@@ -39,54 +40,73 @@ public class MainActivity extends Activity {
         binding.btplus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("Log", binding.editText.getText().toString());
 
-                if(binding.editText.getText().toString() != "" )
-                {
+                try{
                     valueOne = Double.parseDouble(binding.editText.getText().toString() + "");
                     plus = true;
                     binding.editText.setText(null);
 
+                }catch (Exception e)
+                {
+                    Toast.makeText(MainActivity.this, "Incorrect value!", Toast.LENGTH_SHORT).show();
                 }
+
+
             }
         });
 
         binding.btminus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(binding.editText.getText() != null)
-                {
+
+                try{
                     valueOne = Double.parseDouble(binding.editText.getText().toString() + "");
                     minus = true;
                     binding.editText.setText(null);
 
+                }catch (Exception e)
+                {
+                    Toast.makeText(MainActivity.this, "Incorrect value!", Toast.LENGTH_SHORT).show();
                 }
+
+
+
+
             }
         });
 
         binding.btmulty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(binding.editText.getText() != null)
-                {
+
+                try{
                     valueOne = Double.parseDouble(binding.editText.getText().toString() + "");
                     umn = true;
                     binding.editText.setText(null);
 
+                }catch (Exception e)
+                {
+                    Toast.makeText(MainActivity.this, "Incorrect value!", Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
 
         binding.btdivide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(binding.editText.getText() != null )
-                {
 
+                try{
                     valueOne = Double.parseDouble(binding.editText.getText().toString() + "");
                     div = true;
                     binding.editText.setText(null);
+
+                }catch (Exception e)
+                {
+                    Toast.makeText(MainActivity.this, "Incorrect value!", Toast.LENGTH_SHORT).show();
                 }
+
+
 
             }
         });
@@ -94,11 +114,18 @@ public class MainActivity extends Activity {
         binding.btequal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(binding.editText.getText() != null)
-                {
+
+                try{
+
                     valueTwo = Double.parseDouble(binding.editText.getText().toString() + "");
                     computeCalculation();
+
+                }catch (Exception e)
+                {
+                    Toast.makeText(MainActivity.this, "Incorrect value!", Toast.LENGTH_SHORT).show();
                 }
+
+
 
             }
         });
@@ -199,24 +226,24 @@ public class MainActivity extends Activity {
 
         if(plus == true)
         {
-            binding.editText.setText(valueOne + valueTwo + "");
+            binding.editText.setText(decimalFormat.format(valueOne + valueTwo));
             plus = false;
         }
         if(minus == true)
         {
-            binding.editText.setText(valueOne - valueTwo + "");
+            binding.editText.setText(decimalFormat.format(valueOne - valueTwo));
             minus = false;
 
         }
         if(umn == true)
         {
-            binding.editText.setText(valueOne * valueTwo + "");
+            binding.editText.setText(decimalFormat.format(valueOne * valueTwo));
             umn = false;
 
         }
         if(div == true)
         {
-            binding.editText.setText(valueOne / valueTwo + "");
+            binding.editText.setText(decimalFormat.format(valueOne / valueTwo));
             div = false;
 
         }
