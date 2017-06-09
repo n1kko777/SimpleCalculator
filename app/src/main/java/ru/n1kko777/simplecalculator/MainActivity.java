@@ -2,9 +2,7 @@ package ru.n1kko777.simplecalculator;
 
 import android.app.Activity;
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -21,6 +19,7 @@ public class MainActivity extends Activity {
 
     private ActivityMainBinding binding;
     private DecimalFormat decimalFormat;
+    private ViewModel model;
 
 
     @Override
@@ -28,6 +27,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        model = new ViewModel();
+        binding.setModel(model);
         decimalFormat = new DecimalFormat("#.##########");
 
         inic_value();
@@ -42,9 +43,9 @@ public class MainActivity extends Activity {
             public void onClick(View view) {
 
                 try{
-                    valueOne = Double.parseDouble(binding.editText.getText().toString() + "");
+                    valueOne = Double.parseDouble(model.getTextView() + "");
                     plus = true;
-                    binding.editText.setText(null);
+                    model.setTextView("");
 
                 }catch (Exception e)
                 {
@@ -60,9 +61,9 @@ public class MainActivity extends Activity {
             public void onClick(View view) {
 
                 try{
-                    valueOne = Double.parseDouble(binding.editText.getText().toString() + "");
+                    valueOne = Double.parseDouble(model.getTextView() + "");
                     minus = true;
-                    binding.editText.setText(null);
+                    model.setTextView("");
 
                 }catch (Exception e)
                 {
@@ -80,9 +81,9 @@ public class MainActivity extends Activity {
             public void onClick(View view) {
 
                 try{
-                    valueOne = Double.parseDouble(binding.editText.getText().toString() + "");
+                    valueOne = Double.parseDouble(model.getTextView() + "");
                     umn = true;
-                    binding.editText.setText(null);
+                    model.setTextView("");
 
                 }catch (Exception e)
                 {
@@ -97,9 +98,9 @@ public class MainActivity extends Activity {
             public void onClick(View view) {
 
                 try{
-                    valueOne = Double.parseDouble(binding.editText.getText().toString() + "");
+                    valueOne = Double.parseDouble(model.getTextView() + "");
                     div = true;
-                    binding.editText.setText(null);
+                    model.setTextView("");
 
                 }catch (Exception e)
                 {
@@ -117,7 +118,7 @@ public class MainActivity extends Activity {
 
                 try{
 
-                    valueTwo = Double.parseDouble(binding.editText.getText().toString() + "");
+                    valueTwo = Double.parseDouble(model.getTextView() + "");
                     computeCalculation();
 
                 }catch (Exception e)
@@ -133,7 +134,7 @@ public class MainActivity extends Activity {
         binding.btclear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                binding.editText.setText(null);
+                model.setTextView("");
                 valueOne = null;
                 valueTwo = null;
             }
@@ -145,77 +146,77 @@ public class MainActivity extends Activity {
         binding.btdote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                binding.editText.setText(binding.editText.getText() + ".");
+                model.setTextView(model.getTextView() + ".");
             }
         });
 
         binding.btzero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                binding.editText.setText(binding.editText.getText() + "0");
+                model.setTextView(model.getTextView() + "0");
             }
         });
 
         binding.btone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                binding.editText.setText(binding.editText.getText() + "1");
+                model.setTextView(model.getTextView() + "1");
             }
         });
 
         binding.bttwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                binding.editText.setText(binding.editText.getText() + "2");
+                model.setTextView(model.getTextView() + "2");
             }
         });
 
         binding.btthre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                binding.editText.setText(binding.editText.getText() + "3");
+                model.setTextView(model.getTextView() + "3");
             }
         });
 
         binding.btfour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                binding.editText.setText(binding.editText.getText() + "4");
+                model.setTextView(model.getTextView() + "4");
             }
         });
 
         binding.btfive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                binding.editText.setText(binding.editText.getText() + "5");
+                model.setTextView(model.getTextView() + "5");
             }
         });
 
         binding.btsix.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                binding.editText.setText(binding.editText.getText() + "6");
+                model.setTextView(model.getTextView() + "6");
             }
         });
 
         binding.btseven.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                binding.editText.setText(binding.editText.getText() + "7");
+                model.setTextView(model.getTextView() + "7");
             }
         });
 
         binding.bteight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                binding.editText.setText(binding.editText.getText() + "8");
+                model.setTextView(model.getTextView() + "8");
             }
         });
 
         binding.btnine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                binding.editText.setText(binding.editText.getText() + "9");
+                model.setTextView(model.getTextView() + "9");
             }
         });
 
@@ -226,24 +227,24 @@ public class MainActivity extends Activity {
 
         if(plus == true)
         {
-            binding.editText.setText(decimalFormat.format(valueOne + valueTwo));
+            model.setTextView(decimalFormat.format(valueOne + valueTwo));
             plus = false;
         }
         if(minus == true)
         {
-            binding.editText.setText(decimalFormat.format(valueOne - valueTwo));
+            model.setTextView(decimalFormat.format(valueOne - valueTwo));
             minus = false;
 
         }
         if(umn == true)
         {
-            binding.editText.setText(decimalFormat.format(valueOne * valueTwo));
+            model.setTextView(decimalFormat.format(valueOne * valueTwo));
             umn = false;
 
         }
         if(div == true)
         {
-            binding.editText.setText(decimalFormat.format(valueOne / valueTwo));
+            model.setTextView(decimalFormat.format(valueOne / valueTwo));
             div = false;
 
         }
